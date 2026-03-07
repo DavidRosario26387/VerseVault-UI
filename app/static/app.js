@@ -1,4 +1,5 @@
 let page = 1
+let currentId = null
 const PAGE_SIZE = 6
 async function loadImages(){
 const res = await fetch(`/images?page=${page}`)
@@ -40,6 +41,7 @@ function openModal(id, num){
 const modal = document.getElementById("modal")
 const full = document.getElementById("fullImage")
 const download = document.getElementById("download")
+currentId = id
 full.src = `/image/${id}/${num}`
 download.href = `/download/${id}/${num}`
 download.download = `verse_${id}_${num}.png`
@@ -47,6 +49,19 @@ modal.style.display="block"
 }
 function closeModal(){
 document.getElementById("modal").style.display="none"
+currentId = null
+}
+async function deleteImage(){
+if (currentId === null) return
+if (!confirm("Delete this entire record from the database? This cannot be undone.")) return
+const res = await fetch(`/image/${currentId}`, {method: "DELETE"})
+if (res.ok) {
+closeModal()
+page = 1
+await loadImages()
+} else {
+alert("Delete failed. Please try again.")
+}
 }
 function next(){
 page++
