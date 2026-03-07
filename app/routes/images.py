@@ -67,6 +67,23 @@ def get_image(id: int, num: int):
     )
 
 
+@router.delete("/image/{id}")
+def delete_image(id: int):
+
+    conn = get_conn()
+    try:
+        cur = conn.cursor()
+        cur.execute("DELETE FROM daily_verses WHERE id=%s", (id,))
+        if cur.rowcount == 0:
+            conn.rollback()
+            raise HTTPException(status_code=404, detail="Record not found")
+        conn.commit()
+    finally:
+        conn.close()
+
+    return {"deleted": True}
+
+
 @router.get("/download/{id}/{num}")
 def download(id: int, num: int):
 
