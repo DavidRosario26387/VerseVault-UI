@@ -1,8 +1,11 @@
 import os
 import psycopg2
-from dotenv import load_dotenv
-
-load_dotenv()
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    # Render provides environment variables directly.
+    pass
 
 DATABASE_URI = os.getenv("DB_URI")
 

@@ -4,3 +4,4 @@ psycopg2-binary
 bcrypt
 python-multipart
 jinja2
+python-dotenv
