@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Verse Gallery</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="gallery-page">
+<main class="profile-shell">
+<header class="profile-head">
+<div class="profile-avatar" aria-hidden="true">DV</div>
+<div class="profile-meta">
+<h1>dailyverse.admin</h1>
+<div class="profile-stats">
+<span><strong id="statPosts">0</strong> posts</span>
+<span><strong>2</strong> image slots</span>
+<span><strong>1</strong> admin</span>
+</div>
+<p class="profile-bio">Daily Verse image archive</p>
+</div>
+</header>
+<div class="gallery" id="gallery"></div>
+<div class="pagination">
+<button onclick="prev()">Prev</button>
+<span id="pageIndicator">Page 1</span>
+<button onclick="next()">Next</button>
+</div>
+</main>
+<div id="modal">
+<div class="modal-card">
+<img id="fullImage" alt="error">
+<div class="modal-actions">
+<a id="download">Download</a>
+<button onclick="closeModal()">Close</button>
+</div>
+</div>
+</div>
+<script src="/static/app.js"></script>
+</body>
+</html>
