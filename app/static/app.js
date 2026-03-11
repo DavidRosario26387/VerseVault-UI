@@ -1,6 +1,13 @@
 let page = 1
 let currentId = null
 const PAGE_SIZE = 6
+
+function formatDate(dayStr) {
+if (!dayStr) return ''
+const [year, month, day] = dayStr.split('-').map(Number)
+return new Date(year, month - 1, day).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+}
+
 async function loadImages(){
 const res = await fetch(`/images?page=${page}`)
 const items = await res.json()
@@ -26,15 +33,41 @@ gallery.innerHTML = `<div class="empty-state">No images found on this page.</div
 return
 }
 
-items.forEach(item=>{
+const groups = {}
+const groupOrder = []
+items.forEach(item => {
+if (!groups[item.id]) {
+groups[item.id] = { day: item.day, images: [] }
+groupOrder.push(item.id)
+}
+groups[item.id].images.push(item)
+})
+
+groupOrder.forEach(id => {
+const group = groups[id]
+const pair = document.createElement("div")
+pair.className = "day-pair"
+
+const pairImages = document.createElement("div")
+pairImages.className = "pair-images"
+
+group.images.forEach(item => {
 const card = document.createElement("button")
 card.className = "grid-tile"
 card.type = "button"
-card.innerHTML = `
-<img src="/image/${item.id}/${item.num}" alt="Verse ${item.id} - Image ${item.num}">
-`
-card.onclick = ()=>openModal(item.id, item.num)
-gallery.appendChild(card)
+card.innerHTML = `<img src="/image/${item.id}/${item.num}" alt="Verse ${item.id} - Image ${item.num}">`
+card.onclick = () => openModal(item.id, item.num)
+pairImages.appendChild(card)
+})
+
+pair.appendChild(pairImages)
+
+const dateBar = document.createElement("div")
+dateBar.className = "date-bar"
+dateBar.textContent = formatDate(group.day)
+pair.appendChild(dateBar)
+
+gallery.appendChild(pair)
 })
 }
 function openModal(id, num){
