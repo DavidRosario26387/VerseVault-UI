@@ -18,7 +18,7 @@ def get_images(page: int = 1):
     cur = conn.cursor()
 
     cur.execute("""
-        SELECT dv.id, imgs.num, dv.day
+        SELECT dv.id, imgs.num, dv.day, dv.reference
         FROM daily_verses dv
         CROSS JOIN LATERAL (
             VALUES (1, dv.img1), (2, dv.img2)
@@ -34,7 +34,8 @@ def get_images(page: int = 1):
         {
             "id": r[0],
             "num": r[1],
-            "day": str(r[2]) if r[2] else None
+            "day": str(r[2]) if r[2] else None,
+            "reference": str(r[3]) if r[3] else None
         }
         for r in rows
     ]
