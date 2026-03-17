@@ -37,7 +37,7 @@ const groups = {}
 const groupOrder = []
 items.forEach(item => {
 if (!groups[item.id]) {
-groups[item.id] = { day: item.day, images: [] }
+groups[item.id] = { day: item.day, reference: item.reference, images: [] }
 groupOrder.push(item.id)
 }
 groups[item.id].images.push(item)
@@ -64,7 +64,7 @@ pair.appendChild(pairImages)
 
 const dateBar = document.createElement("div")
 dateBar.className = "date-bar"
-dateBar.textContent = formatDate(group.day)
+dateBar.textContent = group.reference ? `${group.reference} · ${formatDate(group.day)}` : formatDate(group.day)
 pair.appendChild(dateBar)
 
 gallery.appendChild(pair)
