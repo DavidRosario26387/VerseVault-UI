@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,22 +7,40 @@
 <link rel="stylesheet" href="/static/style.css">
 </head>
 <body class="login-page">
-<div class="login-shell">
-<div class="login-box">
-<p class="eyebrow">Daily Verse Admin</p>
-<h1>Welcome back</h1>
-<form action="/login" method="post" class="login-form">
-<label>
-<span>Username</span>
-<input name="username" placeholder="Enter username" required>
-</label>
-<label>
-<span>Password</span>
-<input name="password" type="password" placeholder="Enter password" required>
-</label>
-<button type="submit">Login</button>
-</form>
-</div>
-</div>
+<main class="auth-shell">
+  <section class="auth-story">
+    <div class="brand-lockup">
+      <span class="brand-badge" aria-hidden="true">&#10013;</span>
+      <div>
+        <p class="section-kicker">Daily Verse Studio</p>
+        <h1>Admin Login</h1>
+      </div>
+    </div>
+  </section>
+
+  <section class="auth-panel">
+    <div class="login-box">
+      <p class="section-kicker">Sign In</p>
+      <h2>Daily Verse</h2>
+      <p class="panel-copy">
+        Enter your credentials to continue.
+      </p>
+
+      <form action="/login" method="post" class="login-form">
+        <label class="field">
+          <span>Username</span>
+          <input name="username" placeholder="Enter username" autocomplete="username" required>
+        </label>
+
+        <label class="field">
+          <span>Password</span>
+          <input name="password" type="password" placeholder="Enter password" autocomplete="current-password" required>
+        </label>
+
+        <button class="primary-button" type="submit">Open Dashboard</button>
+      </form>
+    </div>
+  </section>
+</main>
 </body>
 </html>

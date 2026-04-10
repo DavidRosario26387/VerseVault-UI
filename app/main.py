@@ -35,3 +35,5 @@ def gallery(request: Request):
         "gallery.html",
         {"request": request}
     )
+
+# uvicorn app.main:app --reload --port 5000
