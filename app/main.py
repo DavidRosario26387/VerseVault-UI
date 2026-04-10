@@ -24,16 +24,18 @@ app.include_router(login.router)
 @app.get("/")
 def home(request: Request):
     return templates.TemplateResponse(
-        "login.html",
-        {"request": request}
+        request=request,
+        name="login.html",
+        context={"request": request},
     )
 
 
 @app.get("/gallery")
 def gallery(request: Request):
     return templates.TemplateResponse(
-        "gallery.html",
-        {"request": request}
+        request=request,
+        name="gallery.html",
+        context={"request": request},
     )
 
 # uvicorn app.main:app --reload --port 5000
